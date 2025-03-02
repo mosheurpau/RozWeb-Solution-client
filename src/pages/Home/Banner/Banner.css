@@ -1,0 +1,9 @@
+.marquee {
+    @apply overflow-hidden whitespace-nowrap; /* Added Tailwind utilities */
+    animation: marquee 10s linear infinite; /* Added animation */
+  }
+  
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+  }
