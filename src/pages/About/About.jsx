@@ -1,15 +1,15 @@
-import React from 'react';
-
+import mosheurRahman from '../../assets/images/mosheur-rahman.jpg';
+import saifulIslam from '../../assets/images/Saiful-Islam.png';
 const teamMembers = [
   {
-    name: 'Ben',
+    name: 'Muhammad Saiful Islam',
     role: 'Founder & Managing Director',
-    imageSrc: '/images/team-member-1.jpg', // Replace with actual image path
+    imageSrc: saifulIslam, // Replace with actual image path
   },
   {
-    name: 'Matt',
+    name: 'Mosheur Rahman',
     role: 'Founder & Development Director',
-    imageSrc: '/images/team-member-2.jpg', // Replace with actual image path
+    imageSrc: mosheurRahman, // Replace with actual image path
   },
   {
     name: 'Maxim',
@@ -20,13 +20,13 @@ const teamMembers = [
 
 function AboutUs() {
   return (
-    <section className="bg-gray-100 py-20">
+    <section className="bg-slate-300 text-white py-20">
       <div className="container mx-auto px-4 ">
         {/* About Us Section */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-bold text-gray-800 mb-6">
-            We're a passionate team of developers specializing in bespoke web
-            applications and mobile apps.
+        <div className="max-w-6xl mx-auto text-start mb-16">
+          <h2 className="text-3xl md:text-7xl font-bold text-gray-800 mb-6">
+            We&apos;re a passionate team of developers specializing in bespoke
+            web applications and mobile apps.
           </h2>
         </div>
 
@@ -55,8 +55,8 @@ function AboutUs() {
                 Quality {'>'} Quantity
               </h3>
               <p className="text-gray-600">
-                We believe in putting standards first. You won't find us cutting
-                any corners. Ever.
+                We believe in putting standards first. You won&apos;t find us
+                cutting any corners. Ever.
               </p>
             </div>
 
@@ -82,7 +82,7 @@ function AboutUs() {
               </h3>
               <p className="text-gray-600">
                 We value proper communication. With a dedicated project manager,
-                you'll always have someone to speak to.
+                you&apos;ll always have someone to speak to.
               </p>
             </div>
 
@@ -94,9 +94,9 @@ function AboutUs() {
                 User First
               </h3>
               <p className="text-gray-600">
-                We put a lot of focus into the users' needs, ensuring projects
-                not only visually appeal but also provide a user-friendly
-                experience.
+                We put a lot of focus into the users&apos; needs, ensuring
+                projects not only visually appeal but also provide a
+                user-friendly experience.
               </p>
             </div>
 

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 function CallToAction() {
   return (
     <section className="bg-blue-500 py-20">
@@ -14,22 +15,24 @@ function CallToAction() {
             ideal software solution with a tailored project quotation.
           </p>
 
-          <motion.button
-            animate={{
-              scale: [1, 1.1, 1], // Scale values for animation
-              transition: {
-                duration: 2, // Animation duration in seconds
-                ease: 'easeInOut', // Easing function
-                repeat: Infinity, // Repeat animation infinitely
-                repeatType: 'reverse', // Reverse animation on repeat
-              },
-            }}
-            className="bg-gradient-to-r from-cyan-500 to-blue-700 
+          <Link to="/contact">
+            <motion.button
+              animate={{
+                scale: [1, 1.1, 1], // Scale values for animation
+                transition: {
+                  duration: 2, // Animation duration in seconds
+                  ease: 'easeInOut', // Easing function
+                  repeat: Infinity, // Repeat animation infinitely
+                  repeatType: 'reverse', // Reverse animation on repeat
+                },
+              }}
+              className="bg-gradient-to-r from-cyan-500 to-blue-700 
                  hover:from-green-600 hover:to-cyan-600 
                   text-white font-bold py-2 px-4 
                  rounded-full shadow-2xl">
-            Discuss your project today →
-          </motion.button>
+              Discuss your project today →
+            </motion.button>
+          </Link>
         </div>
       </div>
     </section>

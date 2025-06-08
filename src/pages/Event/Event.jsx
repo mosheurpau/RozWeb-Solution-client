@@ -17,7 +17,7 @@ const Event = () => {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(
-        'https://birmingham-banglatv-server.onrender.com/bookingEvents',
+        'http://localhost:5000/bookingEvents',
         data
       );
       console.log('Success! Data sent:', response.data);

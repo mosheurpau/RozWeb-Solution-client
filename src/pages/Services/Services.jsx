@@ -25,7 +25,7 @@ function Services() {
     },
     {
       title: 'App Development',
-      link: 'app-development',
+      link: 'mobile-app',
       icon: <FaMobileAlt className="h-12 w-12 text-purple-400" />,
       description:
         'Native Apple iOS and Android apps designed and developed in-house by our app developers. We create intuitive and engaging mobile experiences.',

@@ -1,21 +1,21 @@
 import { useState, useContext, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
-import { FaSearch } from 'react-icons/fa';
+// import { FaSearch } from 'react-icons/fa';
 import logo from '../../assets/images/RozWeb-Solutions.png';
 import { RxCross1 } from 'react-icons/rx';
-import { RiMenu2Fill } from 'react-icons/ri';
+import { RiArrowDownLine, RiMenu2Fill } from 'react-icons/ri';
 // import useUsers from '../../pages/hooks/useUsers';
-import useNews from '../../pages/hooks/useNews';
+// import useNews from '../../pages/hooks/useNews';
 
 const NavBar = () => {
   // const [userInfo] = useUsers();
   const { user, logOut } = useContext(AuthContext);
-  const [searchQuery, setSearchQuery] = useState('');
+  // const [searchQuery, setSearchQuery] = useState('');
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const location = useLocation();
   const [activeLink, setActiveLink] = useState('/');
-  const [news] = useNews();
+  // const [news] = useNews();
   const drawerRef = useRef(null);
 
   useEffect(() => {
@@ -34,54 +34,56 @@ const NavBar = () => {
       });
   };
 
-  const filteredNews = news.filter((item) =>
-    item.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // const filteredNews = news.filter((item) =>
+  //   item.title.toLowerCase().includes(searchQuery.toLowerCase())
+  // );
 
-  const renderNewsCards = () => {
-    if (searchQuery && filteredNews.length > 0) {
-      return (
-        <div className="news-cards !bg-black text-white mt-16 p-2 mb-2 grid grid-cols-1 md:grid-cols-3 gap-4 mx-2 md:mx-20">
-          {filteredNews.map((item) => (
-            <div key={item._id} className=" rounded-xl shadow-xl">
-              <Link to={`/news/${item._id}`} className="text-blue-500 ">
-                {/* <div>
+  // const renderNewsCards = () => {
+  //   if (searchQuery && filteredNews.length > 0) {
+  //     return (
+  //       <div className="news-cards !bg-black text-white mt-16 p-2 mb-2 grid grid-cols-1 md:grid-cols-3 gap-4 mx-2 md:mx-20">
+  //         {filteredNews.map((item) => (
+  //           <div key={item._id} className=" rounded-xl shadow-xl">
+  //             <Link to={`/news/${item._id}`} className="text-blue-500 ">
+  {
+    /* <div>
 
                 </div>
                 <div className="p-4">
                   <h2 className="card-title text-[#6582F6]">{item.title}</h2>
 
                   <p className="text-white">{item.body1}</p>
-                </div> */}
+                </div> */
+  }
 
-                <div className="card lg:card-side bg-base-100 shadow-xl border-2 rounded-full border-white">
-                  <figure>
-                    <img
-                      className="w-full h-full"
-                      src={item.img}
-                      alt="item.title"
-                    />
-                  </figure>
-                  <div className="card-body">
-                    <h2 className="card-title">{item.title}</h2>
-                    <p className="text-white">{item.body1}</p>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
-      );
-    } else if (searchQuery && filteredNews.length === 0) {
-      return (
-        <div className="mt-16 p-4">
-          <p className="text-center">No news found matching your query.</p>
-        </div>
-      );
-    } else {
-      return null;
-    }
-  };
+  //               <div className="card lg:card-side bg-base-100 shadow-xl border-2 rounded-full border-white">
+  //                 <figure>
+  //                   <img
+  //                     className="w-full h-full"
+  //                     src={item.img}
+  //                     alt="item.title"
+  //                   />
+  //                 </figure>
+  //                 <div className="card-body">
+  //                   <h2 className="card-title">{item.title}</h2>
+  //                   <p className="text-white">{item.body1}</p>
+  //                 </div>
+  //               </div>
+  //             </Link>
+  //           </div>
+  //         ))}
+  //       </div>
+  //     );
+  //   } else if (searchQuery && filteredNews.length === 0) {
+  //     return (
+  //       <div className="mt-16 p-4">
+  //         <p className="text-center">No news found matching your query.</p>
+  //       </div>
+  //     );
+  //   } else {
+  //     return null;
+  //   }
+  // };
 
   const navOptions = (
     <>
@@ -90,7 +92,7 @@ const NavBar = () => {
           to="/"
           className={activeLink === '/' ? 'text-[#6582F6]' : ''}
           onClick={() => setIsDrawerOpen(false)}>
-          Home
+          HOME
         </Link>
       </li>
 
@@ -176,113 +178,123 @@ const NavBar = () => {
 
       <li className="sm:flex-1">
         <ul className="menu menu-horizontal px-1">
-          <>
-            <li className="z-50 bg-black">
-              <details>
-                <summary className="font-bold p-0 bg-black">WHAT WE DO</summary>
-                <ul className="bg-black text-white rounded-t-none w-64 p-2 border-2">
-                  <>
-                    <li>
-                      <Link
-                        to="/ecommerce"
-                        className={
-                          activeLink === '/ecommerce' ? 'text-[#6582F6]' : ''
-                        }
-                        onClick={() => setIsDrawerOpen(false)}>
-                        ECOMMERCE
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/web-development"
-                        className={
-                          activeLink === '/web-development'
-                            ? 'text-[#6582F6]'
-                            : ''
-                        }
-                        onClick={() => setIsDrawerOpen(false)}>
-                        WEB DEVELOPMENT
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/web-design"
-                        className={
-                          activeLink === '/web-design' ? 'text-[#6582F6]' : ''
-                        }
-                        onClick={() => setIsDrawerOpen(false)}>
-                        WEB DESIGN
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/mobile-app"
-                        className={
-                          activeLink === '/mobile-app' ? 'text-[#6582F6]' : ''
-                        }
-                        onClick={() => setIsDrawerOpen(false)}>
-                        MOBILE APP
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/maintenance-support"
-                        className={
-                          activeLink === '/maintenance-support'
-                            ? 'text-[#6582F6]'
-                            : ''
-                        }
-                        onClick={() => setIsDrawerOpen(false)}>
-                        MAINTENANCE & SUPPORT
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/desktop-application"
-                        className={
-                          activeLink === '/desktop-application'
-                            ? 'text-[#6582F6]'
-                            : ''
-                        }
-                        onClick={() => setIsDrawerOpen(false)}>
-                        DESKTOP APPLICATION
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/graphics-design"
-                        className={
-                          activeLink === '/graphics-design'
-                            ? 'text-[#6582F6]'
-                            : ''
-                        }
-                        onClick={() => setIsDrawerOpen(false)}>
-                        GRAPHICS DESIGN
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/digital-marketing"
-                        className={
-                          activeLink === '/digital-marketing'
-                            ? 'text-[#6582F6]'
-                            : ''
-                        }
-                        onClick={() => setIsDrawerOpen(false)}>
-                        DIGITAL MARKETING
-                      </Link>
-                    </li>
-                  </>
-                </ul>
-              </details>
-            </li>
-          </>
+          <div className="dropdown dropdown-bottom">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn p-0 m-0 border-0 text-white bg-transparent hover:text-blue-600 hover:bg-transparent  z-50">
+              WHAT WE DO
+              <RiArrowDownLine className="text-xl hover:text-[#6582F6]" />
+            </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content menu rounded-box z-50 shadow-sm  rounded-t-none w-64 p-2 border-2 bg-black text-white">
+              <>
+                <li>
+                  <Link
+                    to="/ecommerce"
+                    className={
+                      activeLink === '/ecommerce' ? 'text-[#6582F6]' : ''
+                    }
+                    onClick={() => setIsDrawerOpen(false)}>
+                    ECOMMERCE
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/web-development"
+                    className={
+                      activeLink === '/web-development' ? 'text-[#6582F6]' : ''
+                    }
+                    onClick={() => setIsDrawerOpen(false)}>
+                    WEB DEVELOPMENT
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/web-design"
+                    className={
+                      activeLink === '/web-design' ? 'text-[#6582F6]' : ''
+                    }
+                    onClick={() => setIsDrawerOpen(false)}>
+                    WEB DESIGN
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/mobile-app"
+                    className={
+                      activeLink === '/mobile-app' ? 'text-[#6582F6]' : ''
+                    }
+                    onClick={() => setIsDrawerOpen(false)}>
+                    MOBILE APP
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/maintenance-support"
+                    className={
+                      activeLink === '/maintenance-support'
+                        ? 'text-[#6582F6]'
+                        : ''
+                    }
+                    onClick={() => setIsDrawerOpen(false)}>
+                    MAINTENANCE & SUPPORT
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/desktop-application"
+                    className={
+                      activeLink === '/desktop-application'
+                        ? 'text-[#6582F6]'
+                        : ''
+                    }
+                    onClick={() => setIsDrawerOpen(false)}>
+                    DESKTOP APPLICATION
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/graphics-design"
+                    className={
+                      activeLink === '/graphics-design' ? 'text-[#6582F6]' : ''
+                    }
+                    onClick={() => setIsDrawerOpen(false)}>
+                    GRAPHICS DESIGN
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/ux-ui-design"
+                    className={
+                      activeLink === '/ux-ui-design' ? 'text-[#6582F6]' : ''
+                    }
+                    onClick={() => setIsDrawerOpen(false)}>
+                    UI & UX Design
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/digital-marketing"
+                    className={
+                      activeLink === '/digital-marketing'
+                        ? 'text-[#6582F6]'
+                        : ''
+                    }
+                    onClick={() => setIsDrawerOpen(false)}>
+                    DIGITAL MARKETING
+                  </Link>
+                </li>
+              </>
+            </ul>
+          </div>
         </ul>
       </li>
       <li>
         <Link
-          to="/projects"
-          className={activeLink === '/projects' ? 'text-[#6582F6]' : ''}
+          to="/work"
+          className={activeLink === '/work' ? 'text-[#6582F6]' : ''}
           onClick={() => setIsDrawerOpen(false)}>
           OUR PROJECTS
         </Link>
@@ -329,7 +341,7 @@ const NavBar = () => {
                           <Link
                             to="/login"
                             onClick={() => setIsDrawerOpen(false)}>
-                            Login
+                            LOGIN
                           </Link>
                         </li>
                       </>
@@ -342,7 +354,7 @@ const NavBar = () => {
             <>
               <li>
                 <Link to="/login" onClick={() => setIsDrawerOpen(false)}>
-                  Login
+                  LOGIN
                 </Link>
               </li>
             </>
@@ -390,15 +402,18 @@ const NavBar = () => {
 
           <div className="flex items-center justify-center">
             <div className="relative">
-              <FaSearch className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400" />
+              {/* <FaSearch className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400" />
               <input
                 style={{ fontFamily: 'Dancing Script' }}
                 type="text"
                 className="disabled pl-10 pr-4 py-2 rounded-full bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:bg-white focus:text-gray-900"
-                placeholder="Search News"
+                placeholder="Search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-              />
+              /> */}
+              <button className="bg-black text-sm text-white font-bold py-2 px-4 rounded border-2 border-white hover:bg-white hover:text-black transition duration-1000">
+                <Link to="/contact">DISCUSS A PROJECT</Link>
+              </button>
             </div>
           </div>
         </nav>
@@ -426,7 +441,7 @@ const NavBar = () => {
         </div>
       )}
 
-      {renderNewsCards()}
+      {/* {renderNewsCards()} */}
     </>
   );
 };

@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import Swal from "sweetalert2";
+import { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 
 const DeleteNews = () => {
   const [news, setNews] = useState();
@@ -7,11 +7,11 @@ const DeleteNews = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await fetch("https://birmingham-banglatv-server.onrender.com/allNews"); // Replace with your API endpoint
+        const response = await fetch('http://localhost:5000/allNews'); // Replace with your API endpoint
         const data = await response.json();
         setNews(data);
       } catch (error) {
-        console.error("Error fetching news:", error);
+        console.error('Error fetching news:', error);
       }
     };
 
@@ -20,15 +20,16 @@ const DeleteNews = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`https://birmingham-banglatv-server.onrender.com/deleteNews/${id}`, { // Replace with your API endpoint
-        method: "DELETE",
+      const response = await fetch(`http://localhost:5000/deleteNews/${id}`, {
+        // Replace with your API endpoint
+        method: 'DELETE',
       });
 
       if (response.ok) {
         Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "News deleted successfully!",
+          position: 'top-end',
+          icon: 'success',
+          title: 'News deleted successfully!',
           showConfirmButton: false,
           timer: 1500,
         });
@@ -37,24 +38,26 @@ const DeleteNews = () => {
         setNews((prevNews) => prevNews.filter((item) => item._id !== id));
       } else {
         Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Something went wrong!",
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
         });
       }
     } catch (error) {
-      console.error("Error deleting news:", error);
+      console.error('Error deleting news:', error);
       Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong!",
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
       });
     }
   };
 
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white text-center">Delete News</h2>
+      <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white text-center">
+        Delete News
+      </h2>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -77,8 +80,7 @@ const DeleteNews = () => {
                 <td>
                   <button
                     className="btn btn-error btn-xs"
-                    onClick={() => handleDelete(item._id)}
-                  >
+                    onClick={() => handleDelete(item._id)}>
                     Delete
                   </button>
                 </td>

@@ -24,16 +24,13 @@ const AddVideo = () => {
         url: srcUrl, // Store the extracted src URL
       };
 
-      const response = await fetch(
-        'https://birmingham-banglatv-server.onrender.com/addVideo',
-        {
-          method: 'POST',
-          headers: {
-            'content-type': 'application/json',
-          },
-          body: JSON.stringify(videoData),
-        }
-      );
+      const response = await fetch('http://localhost:5000/addVideo', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(videoData),
+      });
 
       if (response.ok) {
         const result = await response.json();

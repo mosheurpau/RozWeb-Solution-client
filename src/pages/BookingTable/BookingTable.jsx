@@ -12,7 +12,7 @@ const BookingTable = () => {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          'https://birmingham-banglatv-server.onrender.com/allbookingEvents'
+          'http://localhost:5000/allbookingEvents'
         );
         setBookings(response.data.reverse());
       } catch (error) {
@@ -43,9 +43,7 @@ const BookingTable = () => {
       });
 
       if (result.isConfirmed) {
-        await axios.delete(
-          `https://birmingham-banglatv-server.onrender.com/bookingEvents/${id}`
-        );
+        await axios.delete(`http://localhost:5000/bookingEvents/${id}`);
         setBookings(bookings.filter((booking) => booking._id !== id));
         Swal.fire('Deleted!', 'The booking has been deleted.', 'success');
       }

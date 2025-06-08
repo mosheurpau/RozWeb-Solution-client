@@ -36,7 +36,7 @@ const Profile = () => {
     try {
       setLoading(true);
       const response = await axios.put(
-        `https://birmingham-banglatv-server.onrender.com/user/${userInfo._id}`,
+        `http://localhost:5000/user/${userInfo._id}`,
         editedUser
       );
       console.log('User profile updated successfully:', response.data);

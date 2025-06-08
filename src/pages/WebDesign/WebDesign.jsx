@@ -1,10 +1,10 @@
-import WebDevSection from './DevSection';
-import WebDevFeatures from './WebDevFeatures';
-import CallToAction from './CallToAction';
-import WhyWorkWithUs from './WhyWorkWithUs';
+import WhyWorkWithUs from '../WebDevelopment/WhyWorkWithUs';
+import CallToAction from '../WebDevelopment/CallToAction';
 import ContactForm from '../ContactForm/ContactForm';
+import WebDesignFeatures from './WebDesignFeatures';
+import WebDevSection from '../WebDevelopment/DevSection';
 import { useEffect } from 'react';
-function WebDevelopment() {
+const WebDesign = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
@@ -13,8 +13,8 @@ function WebDevelopment() {
       <div className="bg-black text-white py-10 relative overflow-hidden">
         <div className="max-w-7xl mx-auto text-start p-6">
           <h1 className="text-4xl md:text-6xl font-extrabold ">
-            YOUR NEXT <span className="text-blue-600"> WEB DEVELOPMENT</span>{' '}
-            PARTNER
+            YOUR NEXT{' '}
+            <span className="text-blue-600 uppercase">Web Design</span> PARTNER
           </h1>
           <p className="text-lg max-w-2xl md:text-2xl my-5 md:my-10">
             Over the last 1 years we&apos;ve developed innovative, market
@@ -26,13 +26,15 @@ function WebDevelopment() {
           </button>
         </div>
       </div>
-      <WebDevSection></WebDevSection>
-      <WebDevFeatures></WebDevFeatures>
-      <CallToAction></CallToAction>
-      <WhyWorkWithUs></WhyWorkWithUs>
-      <ContactForm></ContactForm>
+      <div>
+        <WebDevSection></WebDevSection>
+        <WebDesignFeatures></WebDesignFeatures>
+        <CallToAction></CallToAction>
+        <WhyWorkWithUs></WhyWorkWithUs>
+        <ContactForm></ContactForm>
+      </div>
     </section>
   );
-}
+};
 
-export default WebDevelopment;
+export default WebDesign;

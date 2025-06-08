@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
 const axiosPublic = axios.create({
-  baseURL: "https://birmingham-banglatv-server.onrender.com",
+  baseURL: 'http://localhost:5000',
 });
 const useAxiosPublic = () => {
   return axiosPublic;

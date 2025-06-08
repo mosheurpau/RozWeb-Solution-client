@@ -24,6 +24,15 @@ import AddVideo from '../pages/AddVideo/AddVideo';
 import DeleteVideo from '../pages/DeleteVideo/DeleteVideo';
 import DeleteNews from '../pages/DeleteNews/DeleteNews';
 import WebDevelopment from '../pages/WebDevelopment/WebDevelopment';
+import RecentCaseStudies from '../pages/RecentCaseStudies/RecentCaseStudies';
+import Ecommerce from '../pages/Ecommerce/Ecommerce';
+import WebDesign from '../pages/WebDesign/WebDesign';
+import MobileApp from '../pages/MobileApp/MobileApp';
+import Maintenance from '../pages/Maintenance/Maintenance';
+import DesktopApp from '../pages/DesktopApp/DesktopApp';
+import GraphicsDesign from '../pages/GraphicsDesign/GraphicsDesign';
+import DigitalMarketing from '../pages/DigitalMarketing/DigitalMarketing';
+import UiUxDesign from '../pages/UiUxDesign/UiUxDesign';
 
 export const router = createBrowserRouter([
   {
@@ -114,6 +123,42 @@ export const router = createBrowserRouter([
       {
         path: 'about',
         element: <About></About>,
+      },
+      {
+        path: 'work',
+        element: <RecentCaseStudies></RecentCaseStudies>,
+      },
+      {
+        path: 'ecommerce',
+        element: <Ecommerce></Ecommerce>,
+      },
+      {
+        path: 'web-design',
+        element: <WebDesign></WebDesign>,
+      },
+      {
+        path: 'mobile-app',
+        element: <MobileApp></MobileApp>,
+      },
+      {
+        path: 'maintenance-support',
+        element: <Maintenance></Maintenance>,
+      },
+      {
+        path: 'desktop-application',
+        element: <DesktopApp></DesktopApp>,
+      },
+      {
+        path: 'graphics-design',
+        element: <GraphicsDesign></GraphicsDesign>,
+      },
+      {
+        path: 'ux-ui-design',
+        element: <UiUxDesign></UiUxDesign>,
+      },
+      {
+        path: 'digital-marketing',
+        element: <DigitalMarketing></DigitalMarketing>,
       },
       {
         path: 'signUp',
