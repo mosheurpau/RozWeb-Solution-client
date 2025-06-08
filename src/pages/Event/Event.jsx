@@ -17,7 +17,7 @@ const Event = () => {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(
-        'http://localhost:5000/bookingEvents',
+        'https://rozweb-solution-server.onrender.com/bookingEvents',
         data
       );
       console.log('Success! Data sent:', response.data);

@@ -17,7 +17,7 @@ function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false); // State to track submission status
 
   // --- !!! IMPORTANT: Replace this URL with your actual backend API endpoint !!! ---
-  const contactApiUrl = 'http://localhost:5000/contact'; // Example: '/api/saveContactMessage' or full URL
+  const contactApiUrl = 'https://rozweb-solution-server.onrender.com/contact'; // Example: '/api/saveContactMessage' or full URL
 
   // --- Function to execute on form submission ---
   const onSubmit = async (data) => {

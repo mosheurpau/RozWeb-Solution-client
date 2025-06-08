@@ -33,6 +33,7 @@ import DesktopApp from '../pages/DesktopApp/DesktopApp';
 import GraphicsDesign from '../pages/GraphicsDesign/GraphicsDesign';
 import DigitalMarketing from '../pages/DigitalMarketing/DigitalMarketing';
 import UiUxDesign from '../pages/UiUxDesign/UiUxDesign';
+import Dashboard from '../pages/Dashbord/Dashbord';
 
 export const router = createBrowserRouter([
   {
@@ -171,6 +172,14 @@ export const router = createBrowserRouter([
       {
         path: 'web-development',
         element: <WebDevelopment></WebDevelopment>,
+      },
+      {
+        path: 'dashbord',
+        element: (
+          <AdminRoute>
+            <Dashboard></Dashboard>
+          </AdminRoute>
+        ),
       },
       {
         path: 'bookingTable',

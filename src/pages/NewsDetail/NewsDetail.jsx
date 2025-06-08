@@ -15,7 +15,9 @@ const NewsDetail = () => {
   useEffect(() => {
     const fetchNewsArticle = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/news/${id}`);
+        const response = await fetch(
+          `https://rozweb-solution-server.onrender.com/news/${id}`
+        );
         if (!response.ok) {
           throw new Error('Failed to fetch news article');
         }

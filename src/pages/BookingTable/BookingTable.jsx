@@ -12,7 +12,7 @@ const BookingTable = () => {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          'http://localhost:5000/allbookingEvents'
+          'https://rozweb-solution-server.onrender.com/allbookingEvents'
         );
         setBookings(response.data.reverse());
       } catch (error) {
@@ -43,7 +43,9 @@ const BookingTable = () => {
       });
 
       if (result.isConfirmed) {
-        await axios.delete(`http://localhost:5000/bookingEvents/${id}`);
+        await axios.delete(
+          `https://rozweb-solution-server.onrender.com/bookingEvents/${id}`
+        );
         setBookings(bookings.filter((booking) => booking._id !== id));
         Swal.fire('Deleted!', 'The booking has been deleted.', 'success');
       }

@@ -11,7 +11,7 @@ const useUsers = () => {
     const getUserInfo = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/user/${user.email}`
+          `https://rozweb-solution-server.onrender.com/user/${user.email}`
         );
         setUserInfo(response.data[0]);
         setLoading(false);

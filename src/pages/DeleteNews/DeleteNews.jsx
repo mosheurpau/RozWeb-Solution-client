@@ -7,7 +7,9 @@ const DeleteNews = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await fetch('http://localhost:5000/allNews'); // Replace with your API endpoint
+        const response = await fetch(
+          'https://rozweb-solution-server.onrender.com/allNews'
+        ); // Replace with your API endpoint
         const data = await response.json();
         setNews(data);
       } catch (error) {
@@ -20,10 +22,13 @@ const DeleteNews = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/deleteNews/${id}`, {
-        // Replace with your API endpoint
-        method: 'DELETE',
-      });
+      const response = await fetch(
+        `https://rozweb-solution-server.onrender.com/deleteNews/${id}`,
+        {
+          // Replace with your API endpoint
+          method: 'DELETE',
+        }
+      );
 
       if (response.ok) {
         Swal.fire({

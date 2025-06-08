@@ -8,7 +8,9 @@ const useVideos = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:5000/allVideos'); // Replace with your JSON file path or API endpoint
+        const response = await fetch(
+          'https://rozweb-solution-server.onrender.com/allVideos'
+        ); // Replace with your JSON file path or API endpoint
         const data = await response.json();
         setVideos(data);
       } catch (error) {

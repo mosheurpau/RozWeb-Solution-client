@@ -8,7 +8,9 @@ const useNews = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:5000/allNews'); // Replace with your JSON file path or API endpoint
+        const response = await fetch(
+          'https://rozweb-solution-server.onrender.com/allNews'
+        ); // Replace with your JSON file path or API endpoint
         const data = await response.json();
         setNews(data);
       } catch (error) {

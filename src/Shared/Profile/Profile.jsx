@@ -36,7 +36,7 @@ const Profile = () => {
     try {
       setLoading(true);
       const response = await axios.put(
-        `http://localhost:5000/user/${userInfo._id}`,
+        `https://rozweb-solution-server.onrender.com/user/${userInfo._id}`,
         editedUser
       );
       console.log('User profile updated successfully:', response.data);

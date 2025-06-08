@@ -7,7 +7,9 @@ const DeleteVideo = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await fetch('http://localhost:5000/allVideos'); // Replace with your API endpoint
+        const response = await fetch(
+          'https://rozweb-solution-server.onrender.com/allVideos'
+        ); // Replace with your API endpoint
         const data = await response.json();
         setVideos(data);
       } catch (error) {
@@ -20,9 +22,12 @@ const DeleteVideo = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/deleteVideo/${id}`, {
-        method: 'DELETE',
-      });
+      const response = await fetch(
+        `https://rozweb-solution-server.onrender.com/deleteVideo/${id}`,
+        {
+          method: 'DELETE',
+        }
+      );
 
       if (response.ok) {
         Swal.fire({

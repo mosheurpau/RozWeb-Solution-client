@@ -5,11 +5,11 @@ import { AuthContext } from '../../providers/AuthProvider';
 import logo from '../../assets/images/RozWeb-Solutions.png';
 import { RxCross1 } from 'react-icons/rx';
 import { RiArrowDownLine, RiMenu2Fill } from 'react-icons/ri';
-// import useUsers from '../../pages/hooks/useUsers';
+import useUsers from '../../pages/hooks/useUsers';
 // import useNews from '../../pages/hooks/useNews';
 
 const NavBar = () => {
-  // const [userInfo] = useUsers();
+  const [userInfo] = useUsers();
   const { user, logOut } = useContext(AuthContext);
   // const [searchQuery, setSearchQuery] = useState('');
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -95,6 +95,16 @@ const NavBar = () => {
           HOME
         </Link>
       </li>
+      {userInfo.isAdmin === 'true' && (
+        <li>
+          <Link
+            to="/dashbord"
+            className={activeLink === '/dashbord' ? 'text-[#6582F6]' : ''}
+            onClick={() => setIsDrawerOpen(false)}>
+            Dashbord
+          </Link>
+        </li>
+      )}
 
       {/* {userInfo.isAdmin === 'true' && (
         <li className="sm:flex-1 bg-black z-50">
@@ -188,7 +198,7 @@ const NavBar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content menu rounded-box z-50 shadow-sm  rounded-t-none w-64 p-2 border-2 bg-black text-white">
+              className="dropdown-content menu z-50 shadow-sm  rounded w-64 p-2 -ml-6 border-2 bg-black text-white">
               <>
                 <li>
                   <Link

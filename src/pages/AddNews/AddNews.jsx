@@ -48,13 +48,16 @@ const AddNew = () => {
         };
 
         // Send news article data to backend
-        const newsResponse = await fetch('http://localhost:5000/addNew', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newsArticle),
-        });
+        const newsResponse = await fetch(
+          'https://rozweb-solution-server.onrender.com/addNew',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newsArticle),
+          }
+        );
 
         const inserted = await newsResponse.json();
 
