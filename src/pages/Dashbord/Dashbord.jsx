@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import Loading from '../../Shared/Loading/Loading';
 
 function Dashboard() {
   const [contacts, setContacts] = useState([]);
@@ -18,17 +20,51 @@ function Dashboard() {
     }
   };
 
+  const handleDelete = async (id) => {
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: 'This contact will be permanently deleted!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await axios.delete(
+          `https://rozweb-solution-server.onrender.com/contact/${id}`
+        );
+        setContacts((prevContacts) =>
+          prevContacts.filter((contact) => contact._id !== id)
+        );
+
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'The contact has been deleted.',
+          icon: 'success',
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      } catch (error) {
+        Swal.fire({
+          title: 'Error!',
+          text: 'Failed to delete contact.',
+          icon: 'error',
+        });
+        console.error('Error deleting contact:', error);
+      }
+    }
+  };
+
   useEffect(() => {
     fetchContacts();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   if (loading) {
-    return (
-      <div className="text-center text-white mt-10">
-        Loading contact data...
-      </div>
-    );
+    return <Loading></Loading>;
   }
 
   return (
@@ -46,12 +82,13 @@ function Dashboard() {
               <th className="py-3 px-4 border">Phone</th>
               <th className="py-3 px-4 border">Details</th>
               <th className="py-3 px-4 border">Submitted At</th>
+              <th className="py-3 px-4 border">Delete</th>
             </tr>
           </thead>
           <tbody>
-            {contacts.map((contact, index) => (
+            {contacts.map((contact) => (
               <tr
-                key={index}
+                key={contact._id}
                 className="text-center border-t border-gray-600 hover:bg-gray-700">
                 <td className="py-2 px-4">{contact.name}</td>
                 <td className="py-2 px-4">{contact.company}</td>
@@ -60,6 +97,13 @@ function Dashboard() {
                 <td className="py-2 px-4">{contact.projectDetails}</td>
                 <td className="py-2 px-4">
                   {new Date(contact.submittedAt).toLocaleString()}
+                </td>
+                <td className="py-2 px-4">
+                  <button
+                    className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
+                    onClick={() => handleDelete(contact._id)}>
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
