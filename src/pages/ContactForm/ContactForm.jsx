@@ -1,4 +1,72 @@
+import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import axios from 'axios';
+import Swal from 'sweetalert2';
+
 function ContactForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const contactApiUrl = 'https://rozweb-solution-server.onrender.com/contact';
+
+  const onSubmit = async (data) => {
+    setIsSubmitting(true);
+    const contactData = {
+      name: data.name,
+      company: data.company || '',
+      email: data.email,
+      phone: data.phone,
+      projectDetails: data.projectDetails,
+      submittedAt: new Date().toISOString(),
+    };
+
+    try {
+      const response = await axios.post(contactApiUrl, contactData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (
+        response.status === 200 ||
+        response.status === 201 ||
+        response.data?.success
+      ) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Message Sent!',
+          text: 'Thank you for your enquiry. We will be in touch soon.',
+        });
+        reset();
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Submission Error',
+          text:
+            response.data?.message ||
+            'Could not process the request. Please try again.',
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops!',
+        text:
+          error.response?.data?.message ||
+          error.message ||
+          'An unexpected error occurred. Please try again later.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="bg-blue-700 py-20">
       <div className="container mx-auto px-4">
@@ -22,16 +90,16 @@ function ContactForm() {
               <div className="text-xl md:text-2xl text-white space-y-4">
                 <p className="text-left">
                   <a
-                    href="info.rozweb@gmail.com"
+                    href="mailto:info.rozweb@gmail.com"
                     className="text-xl md:text-2xl hover:underline">
                     info.rozweb@gmail.com
                   </a>
                 </p>
                 <p className="text-left">
-                  <a href="+44 7412403906" className="hover:underline">
-                    +44 7412403906
+                  <a href="tel:+447412403906" className="hover:underline">
+                    +44 7412 403906
                   </a>{' '}
-                  <a href="+44 7403 327077" className="hover:underline">
+                  <a href="tel:+447403327077" className="hover:underline">
                     +44 7403 327077
                   </a>
                 </p>
@@ -42,7 +110,9 @@ function ContactForm() {
           {/* Contact Form */}
           <div className="md:w-1/2 md:pl-16">
             <div className="max-w-md mx-auto">
-              <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label
                     htmlFor="name"
@@ -52,9 +122,14 @@ function ContactForm() {
                   <input
                     type="text"
                     id="name"
+                    {...register('name', { required: 'Name is required' })}
                     className="w-full border border-gray-400 px-4 py-2 rounded-lg focus:outline-none focus:border-blue-600"
                   />
+                  {errors.name && (
+                    <p className="text-red-200">{errors.name.message}</p>
+                  )}
                 </div>
+
                 <div>
                   <label
                     htmlFor="company"
@@ -64,9 +139,11 @@ function ContactForm() {
                   <input
                     type="text"
                     id="company"
+                    {...register('company')}
                     className="w-full border border-gray-400 px-4 py-2 rounded-lg focus:outline-none focus:border-blue-600"
                   />
                 </div>
+
                 <div>
                   <label
                     htmlFor="email"
@@ -76,9 +153,20 @@ function ContactForm() {
                   <input
                     type="email"
                     id="email"
+                    {...register('email', {
+                      required: 'Email is required',
+                      pattern: {
+                        value: /\S+@\S+\.\S+/,
+                        message: 'Invalid email address',
+                      },
+                    })}
                     className="w-full border border-gray-400 px-4 py-2 rounded-lg focus:outline-none focus:border-blue-600"
                   />
+                  {errors.email && (
+                    <p className="text-red-200">{errors.email.message}</p>
+                  )}
                 </div>
+
                 <div>
                   <label
                     htmlFor="phone"
@@ -88,9 +176,16 @@ function ContactForm() {
                   <input
                     type="tel"
                     id="phone"
+                    {...register('phone', {
+                      required: 'Phone number is required',
+                    })}
                     className="w-full border border-gray-400 px-4 py-2 rounded-lg focus:outline-none focus:border-blue-600"
                   />
+                  {errors.phone && (
+                    <p className="text-red-200">{errors.phone.message}</p>
+                  )}
                 </div>
+
                 <div className="md:col-span-2">
                   <label
                     htmlFor="projectDetails"
@@ -99,16 +194,28 @@ function ContactForm() {
                   </label>
                   <textarea
                     id="projectDetails"
+                    {...register('projectDetails', {
+                      required: 'Project details are required',
+                    })}
                     className="w-full border border-gray-400 px-4 py-2 rounded-lg focus:outline-none focus:border-blue-600"
                     rows="5"></textarea>
+                  {errors.projectDetails && (
+                    <p className="text-red-200">
+                      {errors.projectDetails.message}
+                    </p>
+                  )}
                 </div>
+
                 <div className="md:col-span-2 flex items-center">
                   <input type="checkbox" id="robot" className="mr-2" />
                   <label htmlFor="robot" className="text-white">
                     I&apos;m not a robot
                   </label>
-                  <button className="ml-auto bg-white hover:bg-gray-100 text-blue-500 font-bold py-3 px-6 rounded-full">
-                    Enquire Now
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="ml-auto bg-white hover:bg-gray-100 text-blue-500 font-bold py-3 px-6 rounded-full">
+                    {isSubmitting ? 'Sending...' : 'Enquire Now'}
                   </button>
                 </div>
               </form>

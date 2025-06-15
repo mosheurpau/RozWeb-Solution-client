@@ -17,21 +17,42 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
-    signIn(email, password).then((result) => {
-      const user = result.user;
-      console.log(user);
-      Swal.fire({
-        title: 'User Login Successful.',
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown',
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp',
-        },
+
+    signIn(email, password)
+      .then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'User Login Successful.',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown',
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp',
+          },
+        });
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.error(error);
+
+        let errorMessage = 'Login failed. Please try again.';
+        if (error.code === 'auth/wrong-password') {
+          errorMessage = 'Incorrect password. Please try again.';
+        } else if (error.code === 'auth/user-not-found') {
+          errorMessage = 'No user found with this email.';
+        } else if (error.code === 'auth/invalid-email') {
+          errorMessage = 'Invalid email format.';
+        } else if (error.code === 'auth/too-many-requests') {
+          errorMessage = 'Too many login attempts. Please try again later.';
+        }
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Failed',
+          text: errorMessage,
+          confirmButtonColor: '#6582F6',
+        });
       });
-      navigate(from, { replace: true });
-    });
   };
 
   return (
@@ -60,6 +81,7 @@ const Login = () => {
                   name="email"
                   placeholder="email"
                   className="input input-bordered"
+                  required
                 />
               </div>
               <div className="form-control">
@@ -71,11 +93,12 @@ const Login = () => {
                   name="password"
                   placeholder="password"
                   className="input input-bordered"
+                  required
                 />
                 <label className="label">
                   <Link
                     to="/reset"
-                    className="label-text-alt text-primary !hover:text-white">
+                    className="label-text-alt text-primary hover:text-white">
                     Forgot password?
                   </Link>
                 </label>
@@ -93,13 +116,13 @@ const Login = () => {
                     New Here?{' '}
                     <Link className="text-primary" to="/signup">
                       Create an account
-                    </Link>{' '}
+                    </Link>
                   </small>
                 </p>
               </div>
             </form>
             <div className="mx-8 text-[#6582F6]">
-              <SocialLogin></SocialLogin>
+              <SocialLogin />
             </div>
           </div>
         </div>
