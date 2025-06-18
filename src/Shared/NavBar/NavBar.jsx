@@ -95,7 +95,7 @@ const NavBar = () => {
           HOME
         </Link>
       </li>
-      {userInfo.isAdmin === 'true' && (
+      {userInfo?.isAdmin === 'true' && (
         <li>
           <Link
             to="/dashbord"
